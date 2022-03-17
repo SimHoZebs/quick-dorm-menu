@@ -4,6 +4,16 @@ import Chromium from "chrome-aws-lambda";
 const Home: NextPage = (
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) => {
+  async function what() {
+    try {
+      const test = await fetch("http://www.gbfh.co.kr/0206/cafeteria/menu/");
+
+      console.log(test);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  what();
   return <pre>{JSON.stringify(props.page, null, 2)}</pre>;
 };
 export default Home;

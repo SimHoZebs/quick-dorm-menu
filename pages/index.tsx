@@ -1,17 +1,18 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
-import { useState } from "react";
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import Chromium from "chrome-aws-lambda";
 
 const Home: NextPage = (
-  props: InferGetStaticPropsType<typeof getStaticProps>
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  const [state, setState] = useState<string>(props.page);
-
-  return <pre>{JSON.stringify(state, null, 2)}</pre>;
+  return <pre>{JSON.stringify(props.page, null, 2)}</pre>;
 };
 export default Home;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const browser = await Chromium.puppeteer.launch({
     args: [...Chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: Chromium.defaultViewport,

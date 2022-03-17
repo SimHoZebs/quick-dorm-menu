@@ -1,6 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useState } from "react";
-import puppeteer from "puppeteer";
+import Chromium from "chrome-aws-lambda";
 
 const Home: NextPage = (
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -12,7 +12,13 @@ const Home: NextPage = (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const browser = await puppeteer.launch();
+  const browser = await Chromium.puppeteer.launch({
+    args: [...Chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: Chromium.defaultViewport,
+    executablePath: await Chromium.executablePath,
+    headless: true,
+    ignoreHTTPSErrors: true,
+  });
   const page = await browser.newPage();
   await page.goto("http://www.gbfh.co.kr/0206/cafeteria/menu/");
 

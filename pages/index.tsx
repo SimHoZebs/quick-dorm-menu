@@ -18,7 +18,7 @@ const Home: NextPage = (
 };
 export default Home;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+const getStaticProps: GetStaticProps = async (context) => {
   const browser = await Chromium.puppeteer.launch({
     args: [...Chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: Chromium.defaultViewport,

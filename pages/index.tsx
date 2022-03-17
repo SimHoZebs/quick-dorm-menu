@@ -6,7 +6,7 @@ const Home: NextPage = (
 ) => {
   async function what() {
     try {
-      const test = await fetch("http://www.gbfh.co.kr/0206/cafeteria/menu/");
+      const test = await fetch("https://www.gbfh.co.kr/0206/cafeteria/menu/");
 
       console.log(test);
     } catch (e) {

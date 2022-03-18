@@ -1,13 +1,27 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Chromium from "chrome-aws-lambda";
+import axios from "axios";
 
 const Home: NextPage = (
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) => {
   async function what() {
     try {
-      const test = await fetch("https://www.gbfh.co.kr/0206/cafeteria/menu/");
-
+      const test = await fetch("http://www.gbfh.co.kr/", {
+        headers: {
+          accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "accept-language": "en-US,en;q=0.9,ko-KR;q=0.8,ko;q=0.7",
+          "cache-control": "no-cache",
+          pragma: "no-cache",
+          "upgrade-insecure-requests": "1",
+        },
+        referrerPolicy: "strict-origin-when-cross-origin",
+        body: null,
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+      });
       console.log(test);
     } catch (e) {
       console.log(e);
